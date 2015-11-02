@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/gliderlabs/registrator/bridge"
+	"github.com/dtmistry/registrator/bridge"
 	consulapi "github.com/hashicorp/consul/api"
 )
 

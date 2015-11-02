@@ -1,11 +1,12 @@
 NAME=registrator
 VERSION=$(shell cat VERSION)
-DEV_RUN_OPTS ?= consul:
+DEV_RUN_OPTS ?= bigip://ec2-52-6-24-103.compute-1.amazonaws.com/pl_rendering
 
 dev:
 	docker build -f Dockerfile.dev -t $(NAME):dev .
 	docker run --rm \
 		-v /var/run/docker.sock:/tmp/docker.sock \
+		-h 192.168.99.100 \
 		$(NAME):dev /bin/registrator $(DEV_RUN_OPTS)
 
 build:
