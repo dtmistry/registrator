@@ -48,6 +48,7 @@ func (b *Bridge) Ping() error {
 }
 
 func (b *Bridge) Add(containerId string) {
+	log.Println("Config : ", b.config)
 	b.Lock()
 	defer b.Unlock()
 	b.add(containerId, false)
