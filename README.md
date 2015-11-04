@@ -10,7 +10,7 @@ You can also provide an image name at startup and registrator will only act on d
 
 Edit the DEV_RUN_OPTS in the 'make' file and simply run make. 
 
-DEV_RUN_OPTS ?= -service <image-name> bigip://<user>:<pass>@<bigip-host>/<bigip-pool>
+	DEV_RUN_OPTS ?= -service <image-name> bigip://<user>:<pass>@<bigip-host>/<bigip-pool>
 
 Alternatively, build the docker image from the Dockerfile and the run the container as below
 
