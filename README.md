@@ -21,14 +21,13 @@ Alternatively, build the docker image from the Dockerfile and the run the contai
 			-service <image-name> bigip://<user>:<pass>@<bigip-host>/<bigip-pool>
 
 
-*image-name = Name of the container image registrator should act on (Optional)
-*user = BigIp user who has access to modify configuration objects
-*pass = BigIp user password
-*bigip-host = BigIp management host
-*bigip_pool = BigIp pool where services will be added
+*image-name* = Name of the container image registrator should act on (Optional)  
+*user* = BigIp user who has access to modify configuration objects  
+*pass* = BigIp user password  
+*bigip-host* = BigIp management host  
+*bigip_pool* = BigIp pool where services will be added  
 
 
 ## License
 
 MIT
-
