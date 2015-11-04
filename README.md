@@ -17,7 +17,7 @@ Alternatively, build the docker image from the Dockerfile and the run the contai
 	$ docker run -d \
 		--volume:/var/run/docker.sock:/tmp/docker.sock \
 		--net=host \
-		registrator:latest \
+		dmistry/registrator \
 			-service <image-name> bigip://<user>:<pass>@<bigip-host>/<bigip-pool>
 
 
