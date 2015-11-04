@@ -12,7 +12,7 @@ Edit the DEV_RUN_OPTS in the 'make' file and simply run make.
 
 	DEV_RUN_OPTS ?= -service <image-name> bigip://<user>:<pass>@<bigip-host>/<bigip-pool>
 
-Alternatively, build the docker image from the Dockerfile and the run the container as below
+Alternatively, run the below command
 
 	$ docker run -d \
 		--volume:/var/run/docker.sock:/tmp/docker.sock \
