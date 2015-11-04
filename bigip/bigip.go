@@ -45,7 +45,7 @@ func (f *Factory) New(uri *url.URL) bridge.RegistryAdapter {
 	}
 	var buffer bytes.Buffer	
 	if uri.Host != "" && uri.Path != "" {
-		buffer.WriteString("https://")
+		buffer.WriteString("http://")
 		buffer.WriteString(uri.Host)
 		buffer.WriteString("/mgmt/tm/ltm/pool")
 	} else {
@@ -67,6 +67,7 @@ func (r *BigIpAdapter) Ping() error {
 	req.SetBasicAuth(r.user, r.pass)
 	resp, err := r.client.Do(req)
 	if(err != nil) {
+		log.Println("Err : ", err)
 		return err
 	}
 	if resp.StatusCode != 200 {

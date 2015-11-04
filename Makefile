@@ -1,6 +1,6 @@
 NAME=registrator
 VERSION=$(shell cat VERSION)
-DEV_RUN_OPTS ?= -service www-car-com-rendering bigip://admin:admin@ec2-52-6-24-103.compute-1.amazonaws.com/pl_rendering
+DEV_RUN_OPTS ?= -service www-cars-com-rendering bigip://admin:admin@192.168.99.100:8000/pl_rendering
 
 dev:
 	docker build -f Dockerfile.dev -t $(NAME):dev .

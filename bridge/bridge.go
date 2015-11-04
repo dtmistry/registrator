@@ -47,18 +47,29 @@ func (b *Bridge) Ping() error {
 	return b.registry.Ping()
 }
 
-func (b *Bridge) Add(containerId string) {
-	log.Println("Config : ", b.config)
+func (b *Bridge) Add(containerId, image string) {
+	if !strings.Contains(image, b.config.Service) {
+		log.Println("add: event skipped for container with image ["+image+"]")
+		return
+	}
 	b.Lock()
 	defer b.Unlock()
 	b.add(containerId, false)
 }
 
-func (b *Bridge) Remove(containerId string) {
+func (b *Bridge) Remove(containerId, image string) {
+	if !strings.Contains(image, b.config.Service) {
+		log.Println("remove: event skipped for container with image ["+image+"]")
+		return
+	}
 	b.remove(containerId, true)
 }
 
-func (b *Bridge) RemoveOnExit(containerId string) {
+func (b *Bridge) RemoveOnExit(containerId, image string) {
+	if !strings.Contains(image, b.config.Service) {
+		log.Println("remove: event skipped for container with image ["+image+"]")
+		return
+	}
 	b.remove(containerId, b.config.DeregisterCheck == "always" || b.didExitCleanly(containerId))
 }
 
@@ -102,6 +113,11 @@ func (b *Bridge) Sync(quiet bool) {
 	// NOTE: This assumes reregistering will do the right thing, i.e. nothing.
 	// NOTE: This will NOT remove services.
 	for _, listing := range containers {
+		if !strings.Contains(listing.Image, b.config.Service) {
+			log.Println("Skipping container with image ["+listing.Image+"]")
+			//Skipping if container image does not match configured image name in the bridge
+			continue
+		}
 		services := b.services[listing.ID]
 		if services == nil {
 			b.add(listing.ID, quiet)

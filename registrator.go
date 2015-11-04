@@ -77,7 +77,7 @@ func main() {
 		RefreshTtl:      *refreshTtl,
 		RefreshInterval: *refreshInterval,
 		DeregisterCheck: *deregister,
-		Service:          *serviceName,
+		Service:         *serviceName,
 	})
 
 	assert(err)
@@ -102,7 +102,12 @@ func main() {
 	// Start event listener before listing containers to avoid missing anything
 	events := make(chan *dockerapi.APIEvents)
 	assert(docker.AddEventListener(events))
-	log.Println("Listening for Docker events ...")
+
+	if *serviceName != "" {
+		log.Printf("Listening for Docker events from %s ...", *serviceName)
+	} else {
+		log.Println("Listening for Docker events ...")
+	}
 
 	b.Sync(false)
 
@@ -144,11 +149,11 @@ func main() {
 	for msg := range events {
 		switch msg.Status {
 		case "start":
-			go b.Add(msg.ID)
+			go b.Add(msg.ID, msg.From)
 		case "die":
-			go b.RemoveOnExit(msg.ID)
+			go b.RemoveOnExit(msg.ID, msg.From)
 		case "stop", "kill":
-			go b.Remove(msg.ID)
+			go b.Remove(msg.ID, msg.From)
 		}
 	}
 
