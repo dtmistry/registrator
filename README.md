@@ -2,7 +2,7 @@
 
 [Registrator](https://github.com/gliderlabs/registrator) with an additional BigIp backend.
 
-The BigIp backend uses the [iControl](https://devcentral.f5.com/login?returnurl=%2fwiki%2fiControlREST.HomePage.ashx) REST Api to add/remove services to a pool.
+The [BigIp](https://f5.com/products/modules/local-traffic-manager) backend uses the [iControl](https://devcentral.f5.com/login?returnurl=%2fwiki%2fiControlREST.HomePage.ashx) REST Api to add/remove services to a pool.
 
 You can also provide an image name at startup and registrator will only act on docker events from containers of that image.
 
